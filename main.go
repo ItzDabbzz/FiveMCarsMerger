@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/merger"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/merger"
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/lipgloss"
 	flag "github.com/spf13/pflag"

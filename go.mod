@@ -1,4 +1,4 @@
-module github.com/iLLeniumStudios/FiveMCarsMerger
+module github.com/ItzDabbzz/FiveMCarsMerge
 
 go 1.17
 

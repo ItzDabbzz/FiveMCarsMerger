@@ -1,8 +1,8 @@
 package carfinder
 
 import (
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
-	sliceutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/slice"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
+	sliceutils "github.com/ItzDabbzz/FiveMCarsMerger/pkg/utils/slice"
 	"github.com/charmbracelet/log"
 	"io/ioutil"
 	"os"

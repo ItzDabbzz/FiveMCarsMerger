@@ -1,8 +1,8 @@
 package manifestgen
 
 import (
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/dft"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
 	"github.com/charmbracelet/log"
 	"io/ioutil"
 	"os"

@@ -1,9 +1,9 @@
 package copier
 
 import (
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
-	fileutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/file"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/dft"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
+	fileutils "github.com/ItzDabbzz/FiveMCarsMerger/pkg/utils/file"
 	"github.com/charmbracelet/log"
 	"os"
 	"strconv"

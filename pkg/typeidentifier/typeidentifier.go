@@ -1,8 +1,8 @@
 package typeidentifier
 
 import (
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
-	xmlutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/xml"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/dft"
+	xmlutils "github.com/ItzDabbzz/FiveMCarsMerger/pkg/utils/xml"
 	"github.com/charmbracelet/log"
 	"io/ioutil"
 	"os"

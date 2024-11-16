@@ -1,14 +1,14 @@
 package merger
 
 import (
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/carfinder"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/copier"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/manifestgen"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/typeidentifier"
-	sliceutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/slice"
-	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/validator"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/carfinder"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/copier"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/dft"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/manifestgen"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/typeidentifier"
+	sliceutils "github.com/ItzDabbzz/FiveMCarsMerger/pkg/utils/slice"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/validator"
 	"github.com/charmbracelet/log"
 	"os"
 	"path/filepath"
