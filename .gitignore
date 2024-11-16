@@ -29,3 +29,4 @@ cars
 .idea
 dist/
 assets
+config.json
