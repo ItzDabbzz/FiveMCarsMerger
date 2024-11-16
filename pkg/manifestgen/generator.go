@@ -19,6 +19,7 @@ type Manifest struct {
 	HasVehicleModelsets bool
 	HasVehicles         bool
 	HasWeaponsFile      bool
+	HasAudio            bool
 }
 
 type Generator interface {

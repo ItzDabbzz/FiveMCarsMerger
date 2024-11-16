@@ -24,6 +24,16 @@ func (v *validator) IsValidStreamFile(file string) bool {
 	return v.HasAnyFileExtension(file, validStreamExtensions)
 }
 
+func (v *validator) IsValidAudioFile(file string) bool {
+	validAudioExtensions := []string{".awc", ".awc2"}
+	return v.HasAnyFileExtension(file, validAudioExtensions)
+}
+
+func (v *validator) IsValidAudioDataFile(file string) bool {
+	validAudioExtensions := []string{".dat151", ".dat151.nametable", ".dat151.rel", ".dat10", ".dat10.nametable", ".dat10.rel", ".dat54", ".dat54.nametable", ".dat54.rel", ".dat"}
+	return v.HasAnyFileExtension(file, validAudioExtensions)
+}
+
 func (v *validator) HasAnyFileExtension(file string, extensions []string) bool {
 	for _, extension := range extensions {
 		if strings.HasSuffix(file, extension) {
