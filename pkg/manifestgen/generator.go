@@ -3,7 +3,7 @@ package manifestgen
 import (
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
-	log "github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -64,7 +64,7 @@ func (g *generator) Generate() error {
 		} else if folder.Name() == strings.ToLower(dft.WEAPONSFILE.String()) {
 			manifest.HasWeaponsFile = true
 		} else {
-			log.Warn("Invalid folder name", folder.Name())
+			log.Warn("Invalid folder detected", "folder", folder.Name())
 		}
 	}
 

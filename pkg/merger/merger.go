@@ -9,7 +9,7 @@ import (
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/typeidentifier"
 	sliceutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/slice"
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/validator"
-	log "github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
 	"os"
 	"path/filepath"
 )
@@ -48,7 +48,7 @@ func (m *merger) Merge() error {
 		return err
 	}
 
-	log.Info("Identifying cars in `" + m.Flags.InputPath + "` folder")
+	log.Info("Identifying cars", "path", m.Flags.InputPath)
 
 	err = filepath.Walk(m.Flags.InputPath, func(path string, f os.FileInfo, err error) error {
 		if f.IsDir() {
@@ -91,7 +91,7 @@ func (m *merger) Merge() error {
 		return nil
 	}
 
-	log.Info("Copying Stream files..")
+	log.Info("Copying Stream files...")
 	err = m.Copier.CopyStreamFilesToOutputDirectory(streamFiles)
 	if err != nil {
 		return err
@@ -120,9 +120,8 @@ func (m *merger) Merge() error {
 
 	validCars := sliceutils.RemoveDuplicates(m.CarFinder.FindValidCars(dataFileCars, streamFileCars))
 
-	log.Info("Following cars are valid in the car pack: ", validCars)
-
-	log.Info("Success. Copy the folder `" + m.Flags.OutputPath + "` and paste it into your resources.")
+	log.Info("Valid cars in the car pack", "cars", validCars)
+	log.Info("Success! Resource ready", "output_folder", m.Flags.OutputPath)
 
 	return nil
 }

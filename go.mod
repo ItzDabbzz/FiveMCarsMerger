@@ -3,7 +3,8 @@ module github.com/iLLeniumStudios/FiveMCarsMerger
 go 1.17
 
 require (
-	github.com/sirupsen/logrus v1.8.1
+	github.com/charmbracelet/log v0.4.0
+	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/spf13/pflag v1.0.5
 )
 

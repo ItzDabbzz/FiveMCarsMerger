@@ -3,7 +3,7 @@ package typeidentifier
 import (
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
 	xmlutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/xml"
-	log "github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
 	"io/ioutil"
 	"os"
 )
@@ -63,10 +63,10 @@ func (ti *typeIdentifier) IdentifyDataFileType(path string) (dft.DataFileType, e
 	case "CWeaponInfoBlob":
 		dataFileType = dft.WEAPONSFILE
 	case "":
-		log.WithField("file", path).Debug("Invalid XML file")
+		log.Debug("Invalid XML file", "file", path)
 		break
 	default:
-		log.WithFields(log.Fields{"file": path, "tag": startTag}).Debug("Unknown tag")
+		log.Debug("Unknown tag detected", "file", path, "tag", startTag)
 		break
 	}
 

@@ -3,7 +3,7 @@ package carfinder
 import (
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
 	sliceutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/slice"
-	log "github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -44,10 +44,10 @@ func (cf *carFinder) FindValidCars(dataFileCars []string, streamFileCars []strin
 	}
 
 	if len(noStreamCars) > 0 {
-		log.Warn("Following cars have no stream files: ", noStreamCars)
+		log.Warn("Following cars have no stream files", "cars", noStreamCars)
 	}
 	if len(noDataCars) > 0 {
-		log.Warn("Following cars have no data files: ", noDataCars)
+		log.Warn("Following cars have no data files", "cars", noDataCars)
 	}
 
 	return validCars

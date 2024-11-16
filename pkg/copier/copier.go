@@ -4,7 +4,7 @@ import (
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/dft"
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
 	fileutils "github.com/iLLeniumStudios/FiveMCarsMerger/pkg/utils/file"
-	log "github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
 	"os"
 	"strconv"
 	"strings"
@@ -34,7 +34,7 @@ func (c *copier) CopyDataFilesToOutputDirectory(dataFiles []dft.DataFile) error 
 
 	for _, dataFile := range dataFiles {
 		dataFileFolder := dataPath + strings.ToLower(dataFile.Type.String()) + "/"
-		log.Debug("Copying " + dataFile.Name)
+		log.Debug("Copying file", "name", dataFile.Name)
 		if _, ok := dataFileFrequencies[dataFile.Type]; !ok {
 			_ = c.CreateDirectoryInOutput("data/" + strings.ToLower(dataFile.Type.String()))
 			dataFileFrequencies[dataFile.Type] = 0
@@ -59,7 +59,7 @@ func (c *copier) CopyStreamFilesToOutputDirectory(streamFiles []dft.StreamFile) 
 	streamPath := c.Flags.OutputPath + "/stream/"
 
 	for _, streamFile := range streamFiles {
-		log.Debug("Copying " + streamFile.Name)
+		log.Debug("Copying file", "name", streamFile.Name)
 		_, err := fileutils.CopyFile(streamFile.Path, streamPath+streamFile.Name)
 		if err != nil {
 			return err

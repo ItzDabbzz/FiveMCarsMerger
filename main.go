@@ -3,7 +3,8 @@ package main
 import (
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/flags"
 	"github.com/iLLeniumStudios/FiveMCarsMerger/pkg/merger"
-	log "github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
+	"github.com/charmbracelet/lipgloss"
 	flag "github.com/spf13/pflag"
 )
 
@@ -23,15 +24,28 @@ func ParseFlags() {
 }
 
 func ConfigureLogger() {
-	log.SetFormatter(&log.TextFormatter{
-		ForceColors: true,
-	})
+	style := lipgloss.NewStyle().
+		Bold(true).
+		Foreground(lipgloss.Color("#7EBC89"))
+
+	log.SetFormatter(log.TextFormatter)
+	log.SetReportCaller(true)
+	log.SetPrefix(style.Render("FiveMCarsMerger"))
 
 	if Flags.Verbose {
 		log.SetLevel(log.DebugLevel)
 	} else {
 		log.SetLevel(log.InfoLevel)
 	}
+	// log.SetFormatter(&log.TextFormatter{
+	// 	ForceColors: true,
+	// })
+
+	// if Flags.Verbose {
+	// 	log.SetLevel(log.DebugLevel)
+	// } else {
+	// 	log.SetLevel(log.InfoLevel)
+	// }
 }
 
 func main() {
