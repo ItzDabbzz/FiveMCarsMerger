@@ -1,9 +1,12 @@
 package main
 
 import (
+	"path/filepath"
+
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/config"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/merger"
+	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/rpf"
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/log"
@@ -29,7 +32,7 @@ func main() {
 	}
 
 	for {
-		mainMenu := []string{"Start Merge Process", "Edit Settings", "Exit"}
+		mainMenu := []string{"Start Merge Process", "Edit Settings", "Extract RPF File", "Exit"}
 		var selected string
 
 		form := huh.NewSelect[string]().
@@ -55,6 +58,15 @@ func main() {
 			if err := config.SaveConfig(appFlags); err != nil {
 				log.Fatal(err)
 			}
+		case "Extract RPF File":
+			extractor := rpf.Extractor{
+				CachePath: filepath.Join("assets", "out"), // Add 'extracted' subfolder
+			}
+
+			if err := extractor.Extract(filepath.Join("assets", "dlc.rpf")); err != nil {
+				log.Fatal(err)
+			}
+			log.Info("RPF extraction completed successfully")
 		case "Exit":
 			return
 		}
