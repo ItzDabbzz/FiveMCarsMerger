@@ -29,7 +29,7 @@ func main() {
 	}
 
 	for {
-		mainMenu := []string{"Start Merge Process", "Edit Settings", "Extract RPF File", "Exit"}
+		mainMenu := []string{"Start Merge Process", "Edit Settings", "Exit"}
 		var selected string
 
 		form := huh.NewSelect[string]().
