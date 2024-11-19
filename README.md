@@ -3,6 +3,8 @@ Merge FiveM cars into a single resource
 
 ## Usage
 
+![Example](https://i.imgur.com/nbYcBDK.mp4)
+
 - Download the binary from [here](https://github.com/ItzDabbzz/FiveMCarsMerger/releases) or build it
 - Save it in a directory
 - Run it
