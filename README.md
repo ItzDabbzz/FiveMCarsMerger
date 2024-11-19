@@ -12,6 +12,10 @@ Merge FiveM cars into a single resource
 
 
 ## Configuration
+![Config](https://github.com/ItzDabbzz/FiveMCarsMerger/blob/main/.github/docs/config_screen.png?raw=true)
+
+It creates a config.json in the same directory as the binary, following this structure:
+
 ```json
 {
   "Verbose": true,
@@ -20,3 +24,8 @@ Merge FiveM cars into a single resource
   "Clean": true
 }
 ```
+
+- **Verbose**: Enable/Disable verbose output
+- **InputPath**: Path to the directory containing the cars to merge
+- **OutputPath**: Path to the directory where the merged cars will be saved
+- **Clean**: Clean the input directory after merging
