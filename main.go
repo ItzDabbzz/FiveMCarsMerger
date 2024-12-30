@@ -1,6 +1,10 @@
 package main
 
 import (
+	"io"
+	"os"
+	"path/filepath"
+
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/config"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/flags"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/merger"
@@ -13,9 +17,15 @@ var Flags flags.Flags
 
 func main() {
 	appFlags, err := config.LoadConfig()
+	logFile := "merger.log"
+	// Clear existing log file by recreating it
+	f, err := os.OpenFile(logFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer f.Close()
+	fileWriter := io.MultiWriter(os.Stdout, f)
+	log.SetOutput(fileWriter)
 
 	if appFlags == nil {
 		// First time setup
@@ -28,6 +38,13 @@ func main() {
 		}
 	}
 
+	if absPath, err := filepath.Abs(appFlags.OutputPath); err == nil {
+		appFlags.OutputPath = absPath
+	}
+	if absPath, err := filepath.Abs(appFlags.InputPath); err == nil {
+		appFlags.InputPath = absPath
+	}
+
 	for {
 		mainMenu := []string{"Start Merge Process", "Edit Settings", "Exit"}
 		var selected string
@@ -38,7 +55,8 @@ func main() {
 			Value(&selected)
 
 		if err := form.Run(); err != nil {
-			log.Fatal(err)
+			log.Error("Menu error:", err)
+			continue
 		}
 
 		switch selected {
@@ -46,7 +64,8 @@ func main() {
 			ConfigureLogger()
 			carsMerger := merger.New(*appFlags)
 			if err := carsMerger.Merge(); err != nil {
-				log.Fatal(err)
+				log.Error("Merge failed:", err)
+				continue
 			}
 		case "Edit Settings":
 			if err := editSettings(appFlags); err != nil {

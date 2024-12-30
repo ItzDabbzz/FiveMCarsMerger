@@ -5,6 +5,8 @@ import "strings"
 type Validator interface {
 	IsValidDataFile(file string) bool
 	IsValidStreamFile(file string) bool
+	IsValidAudioFile(file string) bool
+	IsValidAudioDataFile(file string) bool
 }
 
 type validator struct {

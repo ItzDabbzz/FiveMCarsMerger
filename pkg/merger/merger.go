@@ -1,6 +1,10 @@
 package merger
 
 import (
+	"os"
+	"path/filepath"
+	"strings"
+
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/carfinder"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/copier"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/dft"
@@ -10,8 +14,6 @@ import (
 	sliceutils "github.com/ItzDabbzz/FiveMCarsMerger/pkg/utils/slice"
 	"github.com/ItzDabbzz/FiveMCarsMerger/pkg/validator"
 	"github.com/charmbracelet/log"
-	"os"
-	"path/filepath"
 )
 
 type Merger interface {
@@ -41,10 +43,15 @@ func New(_flags flags.Flags) Merger {
 func (m *merger) Merge() error {
 	var streamFiles []dft.StreamFile
 	var dataFiles []dft.DataFile
+	var audioFiles []dft.AudioFile // New slice for audio files
 
 	log.Info("Creating Output Directory...")
-	err := m.CreateOutputDirectory()
+	outputPath, err := filepath.Abs(m.Flags.OutputPath)
 	if err != nil {
+		return err
+	}
+	m.Flags.OutputPath = outputPath
+	if err := m.CreateOutputDirectory(); err != nil {
 		return err
 	}
 
@@ -52,6 +59,21 @@ func (m *merger) Merge() error {
 
 	err = filepath.Walk(m.Flags.InputPath, func(path string, f os.FileInfo, err error) error {
 		if f.IsDir() {
+			return err
+		}
+		if m.Validator.IsValidAudioFile(f.Name()) || m.Validator.IsValidAudioDataFile(f.Name()) {
+			isConfig := m.Validator.IsValidAudioDataFile(f.Name())
+			dlcFolder := filepath.Base(filepath.Dir(path))
+			if strings.HasPrefix(dlcFolder, "dlc_") {
+				dlcFolder = strings.TrimPrefix(dlcFolder, "dlc_")
+			}
+
+			audioFiles = append(audioFiles, dft.AudioFile{
+				Path:      path,
+				Name:      f.Name(),
+				IsConfig:  isConfig,
+				DLCFolder: dlcFolder,
+			})
 			return err
 		}
 		if m.Validator.IsValidStreamFile(f.Name()) {
@@ -91,6 +113,15 @@ func (m *merger) Merge() error {
 		return nil
 	}
 
+	// Add audio file copying after stream/data files
+	if len(audioFiles) > 0 {
+		log.Info("Copying Audio files...")
+		err = m.Copier.CopyAudioFilesToOutputDirectory(audioFiles)
+		if err != nil {
+			return err
+		}
+	}
+
 	log.Info("Copying Stream files...")
 	err = m.Copier.CopyStreamFilesToOutputDirectory(streamFiles)
 	if err != nil {
@@ -109,10 +140,12 @@ func (m *merger) Merge() error {
 		return err
 	}
 
+	log.Info("Parsing Data Files For Cars...")
 	dataFileCars, err := m.CarFinder.FindDataFileCars()
 	if err != nil {
 		return err
 	}
+	log.Info("Parsing Stream Files For Cars...")
 	streamFileCars, err := m.CarFinder.FindStreamFileCars()
 	if err != nil {
 		return err
